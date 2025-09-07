@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinAccess - U.S. Bank Accounts for Trinidad & Tobago Residents</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1e3a8a 0%, #0891b2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0891b2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease-out;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #10b981, #06b6d4);
+            color: white;
+            padding: 18px 45px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out 0.6s both;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease-out;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 25px;
+            padding: 40px 35px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            border: 1px solid #e5e7eb;
+            animation: fadeInUp 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #1e3a8a, #0891b2);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+        }
+
+        .service-card h3 {
+            color: #1e3a8a;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .service-card .price {
+            color: #10b981;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #10b981, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .service-card .features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .service-card .features li {
+            padding: 10px 0;
+            position: relative;
+            padding-left: 30px;
+            font-weight: 500;
+            color: #4b5563;
+        }
+
+        .service-card .features li::before {
+            content: '✅';
+            position: absolute;
+            left: 0;
+            font-size: 1.1rem;
+        }
+
+        .service-dropdown {
+            margin-top: 25px;
+        }
+
+        .dropdown-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #1e3a8a, #0891b2);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .dropdown-btn:hover::before {
+            left: 100%;
+        }
+
+        .dropdown-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .dropdown-arrow {
+            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .dropdown-btn.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            border-radius: 15px;
+            margin-top: 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .dropdown-content.active {
+            max-height: 500px;
+            padding: 25px;
+        }
+
+        .dropdown-content h4 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .dropdown-content .funding-option {
+            background: white;
+            padding: 12px 18px;
+            margin: 8px 0;
+            border-radius: 10px;
+            border-left: 4px solid #10b981;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .signup-btn {
+            background: linear-gradient(45deg, #ef4444, #f97316);
+            color: white;
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+        }
+
+        .product-btn {
+            background: linear-gradient(45deg, #10b981, #06b6d4);
+            color: white;
+        }
+
+        .product-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: fadeInUp 0.8s ease-out;
+            border: 1px solid #e2e8f0;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 30px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: white;
+        }
+
+        .faq-answer.active {
+            max-height: 600px;
+        }
+
+        .faq-answer-content {
+            padding: 0 30px 30px;
+            color: #4b5563;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+            color: #10b981;
+            font-size: 1.2rem;
+        }
+
+        .faq-question.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #1e3a8a 0%, #0891b2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .contact-item {
+            background: rgba(255,255,255,0.15);
+            padding: 40px 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .contact-item h3 {
+            margin-bottom: 20px;
+            color: #10b981;
+            font-size: 1.3rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-card {
+                padding: 30px 25px;
+            }
+            
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Promo Banner */
+        .promo-banner {
+            background: linear-gradient(45deg, #ef4444, #f97316);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+            animation: pulse 3s infinite;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, #fef3c7, #fed7aa);
+            color: #92400e;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #f59e0b;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .requirement-note {
+            background: linear-gradient(45deg, #fecaca, #fed7d7);
+            color: #dc2626;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #ef4444;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Promo Banner -->
+    <div class="promo-banner">
+        🎯 JUNE PROMO - Limited Spots! Use code FINACCESS for Premium package at just $200 TTD! ⚠ Only 20 spots available
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <img src="https://markethubtt.com/wp-content/uploads/2025/09/Pink-Minimalist-Quote-Phone-Mockup-Instagram-iuPost.png" alt="FinAccess Logo" class="logo">
+                <h1>💳 Need a Real U.S. Bank Account Without Leaving T&T?</h1>
+                <p>Get your Charles Schwab U.S. Bank Account remotely - perfect for PayPal, Amazon, Stripe, Fiverr and more. No U.S. address needed!</p>
+                <a href="#services" class="cta-button">Get Started Today</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Choose Your Package</h2>
+            <p class="section-subtitle">Professional U.S. banking solutions tailored for Trinidad & Tobago residents</p>
+            
+            <div class="services-grid">
+                <!-- Basic Package -->
+                <div class="service-card">
+                    <h3>Basic Package</h3>
+                    <div class="price">$200 - $1,210 TTD</div>
+                    <p>Get a U.S. Brokerage Account - ideal for online transactions, receiving payments, and investing.</p>
+                    
+                    <ul class="features">
+                        <li>Charles Schwab Brokerage Account - No monthly fees</li>
+                        <li>Secure & Hassle-Free Setup</li>
+                        <li>Investment & Payment Ready</li>
+                        <li>Full U.S. banking access</li>
+                    </ul>
+
+                    <div class="service-dropdown">
+                        <button class="dropdown-btn" onclick="toggleDropdown('basic')">
+                            <span>Funding Options & Get Started</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="dropdown-content" id="basic">
+                            <h4>Account Funding Options:</h4>
+                            <div class="funding-option">
+                                <strong>None:</strong> $200 TTD
+                            </div>
+                            <div class="funding-option">
+                                <strong>$50 USD Funded:</strong> $810 TTD
+                            </div>
+                            <div class="funding-option">
+                                <strong>$100 USD Funded:</strong> $1,210 TTD
+                            </div>
+                            <p style="margin: 15px 0; font-style: italic; color: #64748b;">Exchange rate: 8 TTD per 1 USD, sending fee: $160 TTD</p>
+                            
+                            <div class="requirement-note">
+                                ⚠️ IMPORTANT: You must sign up first before purchasing any package
+                            </div>
+
+                            <div class="action-buttons">
+                                <a href="https://markethubtt.com/finaccess-solutions/" class="action-btn signup-btn">
+                                    🔹 Sign Up First (Required)
+                                </a>
+                                <a href="https://markethubtt.com/product/basic-package-get-a-u-s-brokerage-account/" class="action-btn product-btn">
+                                    🔹 Already Signed Up? Order Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Premium Package -->
+                <div class="service-card">
+                    <h3>Premium Package</h3>
+                    <div class="price">$300 - $1,410 TTD</div>
+                    <p>Full U.S. banking access with Checking + Brokerage Account + Visa Debit Card</p>
+                    
+                    <ul class="features">
+                        <li>Charles Schwab Checking + Brokerage Account</li>
+                        <li>U.S. Visa Debit Card</li>
+                        <li>Step-by-Step Usage Guide</li>
+                        <li>Secure & Hassle-Free Setup</li>
+                    </ul>
+
+                    <div class="service-dropdown">
+                        <button class="dropdown-btn" onclick="toggleDropdown('premium')">
+                            <span>Funding Options & Get Started</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="dropdown-content" id="premium">
+                            <h4>Account Funding Options:</h4>
+                            <div class="funding-option">
+                                <strong>None:</strong> $300 TTD
+                            </div>
+                            <div class="funding-option">
+                                <strong>$50 USD Funded:</strong> $1,010 TTD
+                            </div>
+                            <div class="funding-option">
+                                <strong>$100 USD Funded:</strong> $1,410 TTD
+                            </div>
+                            
+                            <div class="highlight">
+                                🎁 <strong>PROMO:</strong> Use code FINACCESS to get Premium for just $200 TTD!
+                            </div>
+
+                            <div class="requirement-note">
+                                ⚠️ IMPORTANT: You must sign up first before purchasing any package
+                            </div>
+
+                            <div class="action-buttons">
+                                <a href="https://markethubtt.com/finaccess-solutions/" class="action-btn signup-btn">
+                                    🔹 Sign Up First (Required)
+                                </a>
+                                <a href="https://markethubtt.com/product/premium-package-get-a-u-s-chequing-bank-brokerage-account/" class="action-btn product-btn">
+                                    🔹 Already Signed Up? Order Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Account -->
+                <div class="service-card">
+                    <h3>US Business Bank Account</h3>
+                    <div class="price">$700 - $4,985 TTD</div>
+                    <p>Business brokerage account for holding funds, receiving payments, and investing under your business name.</p>
+                    
+                    <ul class="features">
+                        <li>Business Brokerage Account - No monthly fees</li>
+                        <li>Step-by-Step Management Guide</li>
+                        <li>Hassle-Free Setup Process</li>
+                        <li>Business name registration</li>
+                    </ul>
+
+                    <div class="service-dropdown">
+                        <button class="dropdown-btn" onclick="toggleDropdown('business')">
+                            <span>Funding Options & Get Started</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="dropdown-content" id="business">
+                            <h4>Account Funding Options:</h4>
+                            <div class="funding-option">
+                                <strong>None:</strong> $700 TTD
+                            </div>
+                            <div class="funding-option">
+                                <strong>$50 USD:</strong> $1,210 TTD
+                            </div>
+                            <div class="funding-option">
+                                <strong>$100 USD:</strong> $1,410 TTD
+                            </div>
+                            <div class="funding-option">
+                                <strong>$500 USD:</strong> $4,985 TTD
+                            </div>
+                            
+                            <p style="margin: 15px 0; font-weight: 600; color: #dc2626;"><strong>⚠️ Note:</strong> Business accounts do NOT come with debit cards.</p>
+
+                            <div class="requirement-note">
+                                ⚠️ IMPORTANT: You must sign up first before purchasing any package
+                            </div>
+
+                            <div class="action-buttons">
+                                <a href="https://markethubtt.com/finaccess-solutions/" class="action-btn signup-btn">
+                                    🔹 Sign Up First (Required)
+                                </a>
+                                <a href="https://markethubtt.com/product/us-business-bank-account/" class="action-btn product-btn">
+                                    🔹 Already Signed Up? Order Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ITIN Service -->
+                <div class="service-card">
+                    <h3>ITIN Application</h3>
+                    <div class="price">$1,000 TTD</div>
+                    <p>Individual Taxpayer Identification Number for non-U.S. residents to file taxes and open financial accounts.</p>
+                    
+                    <ul class="features">
+                        <li>Full ITIN Application Service</li>
+                        <li>Document Guidance</li>
+                        <li>Hassle-Free Process</li>
+                        <li>Individual or Business options</li>
+                    </ul>
+
+                    <div class="service-dropdown">
+                        <button class="dropdown-btn" onclick="toggleDropdown('itin')">
+                            <span>Requirements & Get Started</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="dropdown-content" id="itin">
+                            <h4>Requirements:</h4>
+                            <div class="funding-option">
+                                📌 Valid passport OR acceptable U.S. IRS identification documents
+                            </div>
+                            
+                            <h4>Types Available:</h4>
+                            <div class="funding-option">
+                                <strong>Individual ITIN:</strong> $1,000 TTD
+                            </div>
+                            <div class="funding-option">
+                                <strong>Business ITIN:</strong> $1,000 TTD
+                            </div>
+                            
+                            <p style="margin: 15px 0; font-style: italic; color: #64748b;">Processing time varies based on IRS approval times</p>
+
+                            <div class="requirement-note">
+                                ⚠️ IMPORTANT: You must sign up first before purchasing any package
+                            </div>
+
+                            <div class="action-buttons">
+                                <a href="https://markethubtt.com/finaccess-solutions/" class="action-btn signup-btn">
+                                    🔹 Sign Up First (Required)
+                                </a>
+                                <a href="https://markethubtt.com/product/chatgpt-said-itin-individual-taxpayer-identification-number-application/" class="action-btn product-btn">
+                                    🔹 Already Signed Up? Apply Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- US eSIM -->
+                <div class="service-card">
+                    <h3>US eSIM Service</h3>
+                    <div class="price">$350 TTD</div>
+                    <p>One-year US phone number service for WhatsApp, social media, and online verification needs.</p>
+                    
+                    <ul class="features">
+                        <li>1-year prepaid US phone number</li>
+                        <li>Works with Dingtone app</li>
+                        <li>Perfect for WhatsApp & 2FA</li>
+                        <li>No monthly bills</li>
+                    </ul>
+
+                    <div class="service-dropdown">
+                        <button class="dropdown-btn" onclick="toggleDropdown('esim')">
+                            <span>Features & Get Started</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="dropdown-content" id="esim">
+                            <h4>Why choose our US eSIM?</h4>
+                            <div class="funding-option">
+                                ✅ Convenient & fully digital setup
+                            </div>
+                            <div class="funding-option">
+                                ✅ One-time payment, no surprises
+                            </div>
+                            <div class="funding-option">
+                                ✅ Ideal for freelancers & remote workers
+                            </div>
+                            <div class="funding-option">
+                                ✅ Boost credibility with US number
+                            </div>
+                            <div class="funding-option">
+                                ✅ Works anywhere with internet access
+                            </div>
+
+                            <div class="requirement-note">
+                                ⚠️ IMPORTANT: You must sign up first before purchasing any package
+                            </div>
+
+                            <div class="action-buttons">
+                                <a href="https://markethubtt.com/finaccess-solutions/" class="action-btn signup-btn">
+                                    🔹 Sign Up First (Required)
+                                </a>
+                                <a href="https://markethubtt.com/product/us-esim-one-year/" class="action-btn product-btn">
+                                    🔹 Already Signed Up? Get US Number
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading Services -->
+                <div class="service-card">
+                    <h3>Account Loading Service</h3>
+                    <div class="price">From $560 TTD</div>
+                    <p>Easily load your U.S. bank account with various amounts. Multiple tiers available for different funding needs.</p>
+                    
+                    <ul class="features">
+                        <li>Under $500 USD: Simple fixed fee</li>
+                        <li>$500+ USD: 5% fee structure</li>
+                        <li>$2500+ USD: Bulk loading rates</li>
+                        <li>Secure & reliable funding</li>
+                    </ul>
+
+                    <div class="service-dropdown">
+                        <button class="dropdown-btn" onclick="toggleDropdown('loading')">
+                            <span>View Pricing Tiers & Get Started</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="dropdown-content" id="loading">
+                            <h4>Loading Tiers:</h4>
+                            
+                            <div class="funding-option">
+                                <strong>Under $500:</strong> Fixed $160 TTD fee<br>
+                                <small>$50-$400 USD range</small>
+                            </div>
+                            
+                            <div class="funding-option">
+                                <strong>$500 and Above:</strong> 5% + $81.47 TTD fee<br>
+                                <small>$500-$2500 USD range</small>
+                            </div>
+                            
+                            <div class="funding-option">
+                                <strong>$2500+ USD:</strong> Bulk rates available<br>
+                                <small>Up to $20,000 USD</small>
+                            </div>
+
+                            <div class="requirement-note">
+                                ⚠️ IMPORTANT: You must sign up first before purchasing any package
+                            </div>
+
+                            <div class="action-buttons">
+                                <a href="https://markethubtt.com/finaccess-solutions/" class="action-btn signup-btn">
+                                    🔹 Sign Up First (Required)
+                                </a>
+                                <a href="https://markethubtt.com/product/bank-account-loading-service-under-500-usd/" class="action-btn product-btn">
+                                    🔹 Already Signed Up? Load Account
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        What documents do I need to apply?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            To apply, you'll need:<br><br>
+                            • <strong>A valid Passport</strong> (required)<br>
+                            • <strong>A second ID</strong> (T&T National ID or Driver's Permit)<br>
+                            • <strong>Proof of Address</strong> in your name (utility bill or bank statement)<br><br>
+                            Submit only clear scanned copies in PDF, PNG, or JPG format - no photos accepted.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        Do I need to travel to the U.S. or have a U.S. address?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <strong>No!</strong> This is a fully remote setup. You don't need:<br><br>
+                            • To travel to the U.S.<br>
+                            • A U.S. address<br>
+                            • Company registration<br>
+                            • Help from family/friends in the U.S.<br><br>
+                            We handle everything from Trinidad & Tobago.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        What's the difference between Basic and Premium packages?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <strong>Basic Package ($200 TTD):</strong><br>
+                            • Brokerage account only<br>
+                            • Good for receiving payments and investing<br>
+                            • No physical debit card<br><br>
+                            
+                            <strong>Premium Package ($300 TTD):</strong><br>
+                            • Checking + Brokerage account<br>
+                            • Visa debit card included<br>
+                            • Can shop online and use at ATMs worldwide<br>
+                            • Full banking features<br><br>
+                            
+                            <em>Use promo code FINACCESS to get Premium for just $200 TTD!</em>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        How long does the setup process take?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            The typical timeline is:<br><br>
+                            • <strong>Application submission:</strong> Same day<br>
+                            • <strong>Charles Schwab processing:</strong> 7-14 business days<br>
+                            • <strong>Account approval notification:</strong> Within 2 weeks<br>
+                            • <strong>Debit card shipping (Premium):</strong> Additional 7-10 days<br><br>
+                            We'll keep you updated throughout the entire process.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        Can I use this account for PayPal, Stripe, and other platforms?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <strong>Yes!</strong> This U.S. bank account works perfectly with:<br><br>
+                            • <strong>PayPal</strong> (receiving and sending payments)<br>
+                            • <strong>Stripe</strong> (merchant accounts)<br>
+                            • <strong>Amazon</strong> (shopping and seller payments)<br>
+                            • <strong>Fiverr</strong> (freelancer payments)<br>
+                            • <strong>Upwork</strong> and other freelance platforms<br>
+                            • Any platform requiring a U.S. bank account<br><br>
+                            You'll have no spending limits and full access to the U.S. financial system.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        How do I fund my account after it's opened?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Several funding options available:<br><br>
+                            • <strong>Western Union transfers</strong><br>
+                            • <strong>Our loading service</strong> (5% fee)<br>
+                            • <strong>Wire transfers</strong><br>
+                            • <strong>ACH transfers</strong> (if you have other U.S. accounts)<br><br>
+                            We also offer pre-funded accounts where we load $50 or $100 USD before delivery for your convenience.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        What's included in the referral program?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Earn money by referring others:<br><br>
+                            • <strong>$50 TTD</strong> per successful referral<br>
+                            • <strong>$100 bonus</strong> when you refer 5 people<br><br>
+                            <strong>How it works:</strong><br>
+                            • Referrals must include your name, phone, or email when applying<br>
+                            • Send proof to finaccesssolutions1@gmail.com<br>
+                            • Get paid after their account is successfully opened<br><br>
+                            It's a great way to earn while helping others access U.S. banking!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        Is my information secure with Charles Schwab?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <strong>Absolutely!</strong> Charles Schwab is:<br><br>
+                            • A trusted international investment bank<br>
+                            • <strong>FDIC insured</strong> (deposits protected up to $250,000)<br>
+                            • <strong>SEC regulated</strong> financial institution<br>
+                            • Uses bank-level security encryption<br>
+                            • Has been serving international clients for decades<br><br>
+                            Your money and personal information are protected by the same standards as any major U.S. bank.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2>Ready to Get Started?</h2>
+            <p>Join thousands of Trinidad & Tobago residents who already have their U.S. bank accounts!</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>📱 WhatsApp</h3>
+                    <p>Send "US BANK" to<br><strong>1 (868) 789-5989</strong></p>
+                    <small>For questions only - no applications via WhatsApp</small>
+                </div>
+                
+                <div class="contact-item">
+                    <h3>🌐 Apply Online</h3>
+                    <p><a href="https://markethubtt.com/finaccess-solutions/" style="color: #10b981; font-weight: 600;">markethubtt.com/finaccess-solutions</a></p>
+                    <small>Complete application form & checkout</small>
+                </div>
+                
+                <div class="contact-item">
+                    <h3>📧 Email Support</h3>
+                    <p><strong>finaccesssolutions1@gmail.com</strong></p>
+                    <small>For referral submissions & general inquiries</small>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <a href="https://markethubtt.com/finaccess-solutions/" class="cta-button">Start Your Application Now</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Dropdown functionality
+        function toggleDropdown(id) {
+            const dropdown = document.getElementById(id);
+            const button = dropdown.previousElementSibling;
+            const isActive = dropdown.classList.contains('active');
+            
+            // Close all dropdowns
+            document.querySelectorAll('.dropdown-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.dropdown-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Open clicked dropdown if it wasn't active
+            if (!isActive) {
+                dropdown.classList.add('active');
+                button.classList.add('active');
+            }
+        }
+
+        // FAQ functionality
+        function toggleFAQ(button) {
+            const answer = button.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelectorAll('.faq-question').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked FAQ if it wasn't active
+            if (!isActive) {
+                answer.classList.add('active');
+                button.classList.add('active');
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.service-card, .faq-item');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.service-dropdown')) {
+                document.querySelectorAll('.dropdown-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.querySelectorAll('.dropdown-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+            }
+        });
+
+        // Enhanced button hover effects
+        document.querySelectorAll('.cta-button, .action-btn').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.05)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.dropdown-btn, .action-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255,255,255,0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>
